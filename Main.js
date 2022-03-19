@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 
 const bodyParser = require("body-parser");
 
-const connect = require("./configs/db")
-const GameCRUD = require("./controllers/Game_controller");
-const helpCRUD = require("./controllers/help.controller")
-const {register, login} = require("./controllers/auth.controller")
-const userController = require("./controllers/user.controller")
+const connect = require("./src/configs/db")
+const GameCRUD = require("./src/controllers/Game_controller");
+const helpCRUD = require("./src/controllers/help.controller")
+const {register, login} = require("./src/controllers/auth.controller")
+const userController = require("./src/controllers/user.controller")
 const path = require("path")
 
 const PORT = process.env.PORT || 3000;

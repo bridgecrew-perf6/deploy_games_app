@@ -756,7 +756,7 @@
       //console.log(signin);
       if (signin === "sign in") {
         setInterval(() => {
-          window.location.href = "./pages/signin.html";
+          window.location.href = "";
         }, 5000);
       }
 

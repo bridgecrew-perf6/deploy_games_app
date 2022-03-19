@@ -7,11 +7,6 @@
 
 // Added by shantanu
 
-var url = window.location.href;
-var href = url.split("?")[1];
-console.log(href)
-
-
 window.onscroll = function () { stickyNavbar() };
 
 var navbar = document.querySelector("#secondNav");
@@ -83,6 +78,7 @@ $(".main-img-slider").on(
   }
 );
 
+
 var idGets = JSON.parse(localStorage.getItem("idNum")) || []; //   geting id from local storage
 
 var User_Name = JSON.parse(localStorage.getItem("UserName")) || []; //   geting id from local storage
@@ -97,36 +93,26 @@ User_Name.map(function (el) {
 
 var cartGame = JSON.parse(localStorage.getItem("cartGameData")) || [];
 
-
-
 var whislistGame = JSON.parse(localStorage.getItem("whislistGameDatas")) || [];
-
-
 
 displayItem(cartGame);
 displayItemWhislist(whislistGame);
-  
 
 // <------   CART Button Change Text       ----------->
-
-// console.log(signin);
 function displayItem(cartGame) {
-
-
-  
-  
 
   cartGame.map(function (el) {
     if (idGets.id == el.Id) {
-      
       const cartButtonChange = document.querySelector('#Buttn');
       cartButtonChange.innerText = `VIEW IN CART`;
       cartButtonChange.addEventListener("click", cartpage);
     }
 
   });
-}
 
+
+
+}
 
 // <------   Whislist Button Change Text       ----------->
 
@@ -153,7 +139,7 @@ async function apiCall() {
 
   try {
 
-    const response = await fetch(`http://localhost:3000/games`);
+    const response = await fetch(`http://127.0.0.1:4000/api/gameAllData`);
     const data = await response.json();
 
     // console.log(data)
@@ -450,10 +436,7 @@ function showGames(data) {
 }
 
 
-
-
 function addToCart(gameData) {
-
 
   var cartGames = JSON.parse(localStorage.getItem("cartGameData")) || [];
 
@@ -469,18 +452,10 @@ function addToCart(gameData) {
     swal("Oops!", "Game is already in your cart", "error");
     location.href = "cart.html"
   } else {
-  var signin = document.querySelector("#signin").textContent;
-
-    if(signin == "sign in") {
-    alert("Oops!Please Signin first", "error");
-    location.href = "../pages/signin.html"
-    }
-    else{
     swal("Good Job!", "Game has been sucessfully added to your cart", "success");
-  
     cartGames.push(gameData);
     localStorage.setItem("cartGameData", JSON.stringify(cartGames));
-  }
+
   }
 
 }
@@ -502,18 +477,10 @@ function addToWhislist(gameData) {
     location.href = "wishlist.html"
 
   } else {
-    let signin = document.querySelector("#signin").textContent;
-
-    if(signin == "sign in") {
-    alert("Oops! Please Signin first");
-      window.location.href = "../pages/signin.html"
-    }
-    else{
     swal("Good Job!", "Game has been sucessfully added to your favourite item", "success");
     whislistGameData.push(gameData);
     localStorage.setItem("whislistGameDatas", JSON.stringify(whislistGameData));
   }
-}
 
 }
 function BuyButtonCheckout(gameData) {

@@ -191,34 +191,34 @@
                 alt="epic" height="100%" width="100%">
         </div>
         <div id="box2">
-            <form method="post" action="/post-feedback">
+            <form>
                 <div>
                     <h4>Sign UP</h4>
                 </div>
                 <div>
-                    <select id="country" name="countryName" placeholder="Country">
-                        <option value="australia" name="australia">Australia</option>
-                        <option value="canada " name="canada">Canada</option>
-                        <option value="usa" name="usa">United States</option>USA</option>
-                        <option value="india" name="india">India</option>
+                    <select id="country" name="country" placeholder="Country">
+                        <option value="australia">Australia</option>
+                        <option value="canada">Canada</option>
+                        <option value="usa">USA</option>
+                        <option value="india">India</option>
                     </select>
                 </div>
                 <br>
                 <div id="name">
-                    <input id="firsttext" name="firstName" type="text" placeholder="First Name *" />
-                    <input id="lasttext" name="lastName" type="text" placeholder="last Name *"  />
+                    <input id="firsttext" type="text" placeholder="Fast Name *" />
+                    <input id="lasttext" type="text" placeholder="Last Name *" />
                 </div>
                 <br>
                 <div>
-                    <input id="dname" type="text" name="displayName" placeholder="Display Name*" />
+                    <input id="dname" type="text" placeholder="Display Name*" />
                 </div>
                 <br>
                 <div>
-                    <input id="email" type="text" name="email" placeholder="Email*" />
+                    <input id="email" type="text" placeholder="Email Address *" />
                 </div>
                 <br>
                 <div>
-                    <input id="password" name="password" type="password" placeholder="Password *" autocomplete="no"/>
+                    <input id="password" type="password" placeholder="Password *" />
                 </div>
                 <div id="checkbox">
                     <div class="checkbox"><input type="checkbox" id="loginotp"></div>
@@ -240,7 +240,7 @@
                 </div>
                 <br>
 
-                <span class="sin">Have an Epic Games account?<a href="../pages/signin.html">Login in</a></span>
+                <span class="sin">Have an Epic Games account?<a href="signin.html">Login in</a></span>
                 <br>
                 <span class="back">Back to <a href="signupopt.html">all sign up options</a></span>
             </form>
@@ -270,12 +270,12 @@
         event.preventDefault();
         try {
             var registered_data = {
-                countryName: document.querySelector("#country").value,
-                firstName: document.querySelector("#firsttext").value,
-                secondName: document.querySelector("#lasttext").value,
-                displayName: document.querySelector("#dname").value,
+                name: document.querySelector("#country").value,
+                firstname: document.querySelector("#firsttext").value,
+                secondname: document.querySelector("#lasttext").value,
                 email: document.querySelector("#email").value,
                 password: document.querySelector("#password").value,
+                username: document.querySelector("#dname").value,
 
             }
 
@@ -286,7 +286,7 @@
         registered_data = JSON.stringify(registered_data);
         console.log(registered_data)
 
-        var response = await fetch("http://localhost:3000/register", {
+        var response = await fetch("http://127.0.0.1:4000/api/User_Details", {
             method: "POST",
             body: registered_data,
             headers: {
@@ -296,13 +296,13 @@
 
         var data = await response.json();
         console.log(data);
-        if (data.message != null) {
-            swal("Oops!", data.message, "error");
+        if (data.error === true) {
+            swal("Oops!", "Registration failed, user already exists", "error");
         }
         else {
             swal("Good Job!", "Registration succesfull", "success");
         
-                window.location.href = ""
+                window.location.href = "signin.html"
 
 
         }

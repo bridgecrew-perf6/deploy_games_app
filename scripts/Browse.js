@@ -1,9 +1,7 @@
-   import { footer} from "../components/navFooter.js";
+   import { footer} from "/components/navFooter.js";
    import apiCall from "./fetch.js";
    document.querySelector("#footer").innerHTML = footer();
-   var page = 1;
-   var size = 10;
-   var url = "http://localhost:3000/games?page="+page+"&size= "+size+"";
+   var url = "http://127.0.0.1:4000/api/gameAllData"
     var data;
    var res = apiCall(url);
    res.then((res) => {
@@ -12,46 +10,6 @@
        data = res;
        //console.log(data)
    });
-
-   document.querySelector("#next > #nextpage").addEventListener("click",nextPage);
-   document.querySelector("#next > #prevpage").addEventListener("click",prevPage);
-  
-   function nextPage(selected){
-        
-       var selected = document.querySelector("#nextpage").textContent;
-       //console.log(selected)
-       if (selected === "Next >>>>"){
-           //console.log(selected)
-        page = page+1;
-        //console.log(selected);
-        let url = "http://localhost:3000/games?page="+page+"&size="+size+"";
-    
-        let res = apiCall(url);
-        res.then((res) => {
-            console.log(res)
-            appendData(res);
-        })
-       } 
-   
-   }
-
-    function prevPage(){
-    let selected = document.querySelector("#prevpage").textContent;
-//     console.log(selected);
-        if (selected === "<<<< Prev"){
-            //console.log(selected)
-        page = page-1;
-        console.log(page)
-        //console.log(selected);
-        let url = "http://localhost:3000/games?page="+page+"&size="+size+"";
-
-        let res = apiCall(url);
-        res.then((res) => {
-            console.log(res)
-            appendData(res);
-        })
-        } 
-    }
 
    var userName = JSON.parse(localStorage.getItem("UserName"));
    console.log(userName);
@@ -69,15 +27,15 @@
    function appendData(res) {
     document.querySelector("#displayGames").textContent="";
        res.map((el) => {
-        console.log(el._id)
-           let { strikeprice, price, id, thumbnail, _id, title, short_description } = el;
+        //console.log(el.id)
+           let { strikeprice, price, id, thumbnail, title, short_description } = el;
            var div = document.createElement("div");
            div.addEventListener("click",function (){
                let idNum = {
                    id,
                }
                localStorage.setItem("idNum",JSON.stringify(idNum));
-               window.location.href=`gameDetailsPage.html?${_id}`;
+               window.location.href="gameDetailsPage.html";
            })
            var image = document.createElement("img");
            image.src = thumbnail;
@@ -143,8 +101,6 @@
        
    }
 
-   
-
 
    // main search functionaity
 
@@ -155,14 +111,12 @@
 
         if (event.key === "Enter"){
             console.log(input)
-            let url = "http://localhost:3000/games?title="+input+"&page="+page+"&size="+size+"";
+            let url = "http://127.0.0.1:4000/api/gameAllData?title="+input+"";
 
        let res = apiCall(url);
-       //console.log(res)
        res.then((res) => {
           
            data = res;
-           console.log(data)
            console.log(data.length)
            if (data.length === 0){
                swal("Oops!", "No Result Found", "error")
@@ -185,7 +139,7 @@
 
         if (event.key === "Enter"){
             console.log(input)
-            let url = "http://localhost:3000/games?genre="+input+"&page="+page+"&size="+size+"";
+            let url = "http://127.0.0.1:4000/api/gameAllData?genre="+input+"";
 
        let res = apiCall(url);
        res.then((res) => {
@@ -253,7 +207,7 @@
    function sortByGenre(){
        let selected = document.querySelector("#genre").value;
        //console.log(selected);
-       let url = "http://localhost:3000/games?genre="+selected+"&page="+page+"&size="+size+"";
+       let url = "http://127.0.0.1:4000/api/gameAllData?genre="+selected+"";
 
        let res = apiCall(url);
        res.then((res) => {
@@ -269,7 +223,7 @@
 
    function sortByplatform(){
     let selected = document.querySelector("#platform").value;
-    let url = "http://localhost:3000/games?platform="+selected+"&page="+page+"&size="+size+"";
+    let url = "http://127.0.0.1:4000/api/gameAllData?platform="+selected+"";
 
        let res = apiCall(url);
        res.then((res) => {
@@ -288,7 +242,6 @@
    }
 
    
-
 //    document.querySelector(".carousel-cell").addEventListener("click",storeGenre)
 
 //    function storeGenre(){
@@ -368,3 +321,4 @@
    })
 
 
+ 

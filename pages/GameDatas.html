@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Browse</title>
-    <link rel="stylesheet" href="../styles/Browse.css" />
-    <script src="../scripts/navStyle.js"></script>
-    <script type="module" src="../scripts/Browse.js"></script>
+    <title>Game Collections</title>
+    <link rel="stylesheet" href="/styles/Browse.css" />
+    <script src="/scripts/navStyle.js"></script>
+    <script type="module" src="/scripts/GameDatas.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,8 +28,6 @@
       href="https://static-assets-prod.epicgames.com/epic-store/static/webpack/../favicon.ico"
       type="image/x-icon"
     />
-    
-  
 
     <style>
       /* <-----   Back To Top Button -----------> */
@@ -73,21 +71,9 @@
             class="hidden md:flex lg:flex justify-between items-center uppercase text-gray-300 text-xs"
           >
             <div class="flex items-center justify-between">
-              <div class="px-2">
-                <a class="hover:text-white hover:no-underline" href="/"
-                  >Store</a
-                >
-              </div>
-              <div class="px-2">
-                <a class="hover:text-white hover:no-underline" href="faq.html"
-                  >faq</a
-                >
-              </div>
-              <div class="px-2">
-                <a class="hover:text-white hover:no-underline" href="help.html"
-                  >help</a
-                >
-              </div>
+              <div class="px-2">Store</div>
+              <div class="px-2">faq</div>
+              <div class="px-2"><a href="help.html">help</a></div>
               <div class="px-2">unreal engine</div>
             </div>
             <!-- <div class="mx-[50%]" ></div> -->
@@ -140,7 +126,7 @@
           </div>
 
           <div class="px-6 pt-4 pb-2 hidden md:inline">
-            <a class="hover:text-white hover:no-underline" href="../index.html">
+            <a href="Discover.html">
               <button
                 class="inline-block hover:text-white rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2"
               >
@@ -148,14 +134,14 @@
               </button>
             </a>
 
-            <a class="hover:text-white hover:no-underline" href="Browse.html">
+            <a href="Browse.html">
               <button
                 class="inline-block hover:text-white rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2"
               >
                 Browser
               </button>
             </a>
-            <a class="hover:text-white hover:no-underline" href="news.html">
+            <a href="news.html">
               <button
                 class="inline-block hover:text-white rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2"
               >
@@ -165,7 +151,7 @@
           </div>
 
           <div class="pl-[30%] px-6 pt-4 pb-2 hidden md:inline">
-            <a class="hover:text-white hover:no-underline" href="wishlist.html">
+            <a href="Wishlist.html">
               <button
                 class="inline-block hover:text-white rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2"
               >
@@ -174,16 +160,17 @@
             </a>
             <a class="hover:text-white hover:no-underline" href="cart.html">
               <button
-                class="inline-block hover:text-white rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2"
+                class="inline-block text-danger rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2"
               >
                 Cart
               </button>
             </a>
 
             <span
-              class="rounded-full px-3 ml-[-18px] text-sm text-white border border-white bg-black"
+              class="rounded-full px-3 ml-[-18px] text-sm text-white border border-white light bg-black"
+              style="border: 1px solid white"
               id="cartTotal"
-              >1</span
+              >0</span
             >
           </div>
 
@@ -193,15 +180,11 @@
         </div>
       </nav>
     </div>
-    <!-- Product Slider  -->
-    <div id="Popular">
-      <h1>Popular Genres</h1>
-    </div>
-
-    <div class="carousel" data-flickity='{ "wrapAround": true }'></div>
-
-    <!-- product slider End -->
+    <div id="navbar"></div>
     <!-- main display -->
+    <div id="Header">
+      <h1 class="Header">Fighting Games</h1>
+    </div>
     <div id="gameCategories">
       <!-- top most filter part -->
       <div id="topFilter">
@@ -217,7 +200,6 @@
       <div id="contDisplayGames">
         <!-- displaying games -->
         <div id="displayGames"></div>
-        
         <!-- filter parts starts here -->
         <div id="Filters">
           <h2>Filters</h2>
@@ -231,17 +213,6 @@
             <option value="9100">Greater Than Rs.9000.00</option>
           </select>
           <hr />
-          <select name="Genre" id="genre" class="selection">
-            <option value="">Genre</option>
-            <option value="Fighting">Fighting</option>
-            <option value="Shooter">Shooter</option>
-            <option value="Strategy">Strategy</option>
-            <option value="Racing">Racing</option>
-            <option value="Sports">Sports</option>
-            <option value="Sports">MMORPG</option>
-            <option value="Sports">MMO</option>
-          </select>
-          <hr />
           <select name="Platform" id="platform" class="selection">
             <option value="">Platform</option>
             <option value="Web Browser">Web Browser</option>
@@ -249,10 +220,6 @@
           </select>
           <hr />
         </div>
-      </div>
-      <div id="next">
-        <button id="prevpage"><<<< Prev</button>
-        <button id="nextpage">Next >>>></button>
       </div>
       <div class="back-to-top">
         <a href="#gameCategories">
@@ -269,11 +236,10 @@
 
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 <script type="module" defer>
-  import { sticknav } from "../components/stickyNav.js";
+  import { sticknav } from "/components/stickyNav.js";
   sticknav();
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <!-- <----------   Contact US file  Start          --------------------  > -->
 
 <script

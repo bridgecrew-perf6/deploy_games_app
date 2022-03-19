@@ -182,7 +182,7 @@
             <button
               class="inline-block hover:text-white rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2"
             >
-              <a href="./index.html">Discover</a>
+              <a href="/">Discover</a>
             </button>
             <button
               class="inline-block hover:text-white rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2"
@@ -1375,8 +1375,12 @@
       }
 
       var signin = document.querySelector("#signin").textContent;
-      console.log(signin);
-      
+      //console.log(signin);
+      if (signin === "sign in") {
+        setInterval(() => {
+          window.location.href = "./pages/signin.html";
+        }, 5000);
+      }
 
       document
         .querySelector("#navSearch")

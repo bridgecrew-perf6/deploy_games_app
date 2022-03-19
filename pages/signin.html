@@ -184,7 +184,7 @@
         />
       </div>
       <div id="box2">
-        <form method="post" action="/post-feedback">
+        <form>
           <div>
             <h4>Signin IN WITH AN EPIC GAMES ACCOUNT</h4>
           </div>
@@ -195,7 +195,7 @@
           </div>
           <br />
           <div>
-            <input id="password" type="password" placeholder="Password *" autocomplete="on" />
+            <input id="password" type="password" placeholder="Password *" />
           </div>
 
           <div>
@@ -234,7 +234,7 @@
 </html>
 
 <!-- <----------   Contact US file  Start          --------------------  > -->
-<!-- 
+
 <script type="text/javascript">
   !(function (t, e) {
     t.artibotApi = {
@@ -268,62 +268,41 @@
           }
         });
   })(window, document);
-</script> -->
+</script>
 <!-- <----------   Contact US  file END             --------------------  > -->
 
 <script type="module">
   import apiCall from "/scripts/fetch.js";
-  
-  document.querySelector("form").addEventListener("submit", login);
 
-  async function login(event){
-        event.preventDefault();
-        try{
+  var url = "http://127.0.0.1:4000/api/User_Details";
 
-        var login_data = {
-            email : document.querySelector("#email").value,
-            password : document.querySelector("#password").value
-        };
-        
-        login_data = JSON.stringify(login_data);
-      }
-      catch(e){
-        console.log(e)
-      }
+  var response = apiCall(url);
+  var data;
+  response.then((response) => {
+    data = response;
+  });
 
+  document.querySelector("form").addEventListener("submit", checkDetails);
 
-        let login_url = `http://localhost:3000/login`;
-
-        let response = await fetch(login_url, {
-            method : 'POST',
-            body : login_data,
-            headers : {
-                "Content-Type" : "application/json",
-            },
-        });
-
-       let data  = await response.json();
-        //console.log("loginData:", data.user.displayName);
-        if (data.message != null){
-          //console.log(data.message);
+  function checkDetails(event) {
+    event.preventDefault();
+    var email = document.querySelector("#email").value;
+    var password = document.querySelector("#password").value;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].email === email && data[i].password === password) {
+        //console.log(reguser[i]);
+        swal("Good Job!", "login sucessfull", "success");
+        var userName = [];
+        userName.push(data[i].username);
+        localStorage.setItem("UserName", JSON.stringify(userName));
+        window.location.href = "/index.html";
+      } else {
+        if (i === data.length - 1) {
           swal("Oops!", "Please provide valid credential", "error");
         }
-        else {
-          //console.log(data.displayName)
-
-          var userName = [];
-          userName.push(data.user.displayName);
-          localStorage.setItem("UserName", JSON.stringify(userName));
-          swal("Good Job!", `Hi ${data.user.displayName} Welcome to Epic Games`, "success");
-          setTimeout(function(){
-            window.location.href = "../index.html";
-          },2000)
-        }
-       
-}
-
-
-  
+      }
+    }
+  }
 </script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

@@ -1,8 +1,8 @@
 import apiCall from './fetch.js';
-import { footer } from "../components/navFooter.js";
+import { footer } from "/components/navFooter.js";
 
 document.querySelector("#footer").innerHTML = footer();
-var url = "http://localhost:3000/games"
+var url = "http://127.0.0.1:4000/api/gameAllData"
 var data;
 var res = apiCall(url);
 res.then((res) => {
@@ -39,7 +39,6 @@ inp.addEventListener('input', handleDebounce)
 function handleDebounce() {
     console.log("handleDebounce")
     const inputBoxHelp = document.getElementById("inputBoxHelp").value;
-    console.log(inputBoxHelp)
     console.log('inputBoxHelp:', inputBoxHelp)
     debounceFunction(searchForHelp(inputBoxHelp), 5000)
 }
@@ -60,15 +59,14 @@ function searchForHelp(value) {
     //console.log("searchForHelp")
 
     //fetching the data
-    console.log(value)
-    apiCall(`http://localhost:3000/help?q=${value}`)
+    apiCall(`http://127.0.0.1:4000/api/help?q=${value}`)
         .then((res) => {
             console.log('res:', res);
             if (res.length !== 0) {
                 displayHelp(res);
             }
             else {
-                apiCall(`http://localhost:3000/help`)
+                apiCall(`http://127.0.0.1:4000/api/help`)
                     .then((response) => {
                         console.log('response:', response)
                         var responses = response;

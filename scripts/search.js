@@ -1,29 +1,51 @@
-import { footer } from "../components/navFooter.js";
+import { footer } from "/components/navFooter.js";
 import apiCall from "./fetch.js";
-
 document.querySelector("#footer").innerHTML = footer();
-var genre = JSON.parse(localStorage.getItem("genreData"));
-console.log(genre.title);
-var page = 1;
-var size = 10;
-var url = `http://localhost:3000/games?genre=${genre.title}&page=${page}&size=${size}`;
-var data;
-var res = apiCall(url);
-res.then((res) => {
-    console.log(res);
-    appendData(res);
-    data = res;
-    //console.log(data)
-});
+
+
+// main search functionaity
+
+var userName = JSON.parse(localStorage.getItem("UserName"));
+console.log(userName);
+if (userName !== null) {
+    document.querySelector("#signin").textContent = userName;
+}
+else {
+
+}
 
 let gamesArr = JSON.parse(localStorage.getItem("cartGameData")) || [];
    
    document.querySelector("#cartTotal").innerText = `${gamesArr.length}`;
-
    
-document.querySelector(".Header").textContent = genre.title + " " + "Games"
+
+let input = JSON.parse(localStorage.getItem("inputTitle"))
+console.log(input)
+let url = "http://127.0.0.1:4000/api/gameAllData?title=" + input + "";
+
+let res = apiCall(url);
+res.then((res) => {
+    appendData(res)
+    data = res;
+    console.log(data.length)
+    if (data.length === 0) {
+        swal("Oops!", "Please provide valid credential", "error")
+    }
+    ;
+})
+res.catch((error) => {
+    console.log(error)
+})
+
+
+var userName = JSON.parse(localStorage.getItem("UserName"));
+console.log(userName);
+if (userName.length !== 0) {
+    document.querySelector("#signin").textContent = userName;
+}
+
+
 function appendData(res) {
-    //document.querySelector(".header").textContent= input + " " + "Games";
     document.querySelector("#displayGames").textContent = "";
     res.map((el) => {
         //console.log(el.id)
@@ -61,22 +83,6 @@ function appendData(res) {
     })
 }
 
-// main search functionaity
-
-document.querySelector("#navSearch").addEventListener("keypress", getMainData);
-
-function getMainData(event) {
-    let input = document.querySelector("#navSearch").value
-
-    if (event.key === "Enter") {
-        console.log(input)
-        var inp = [];
-        inp.push(input);
-        localStorage.setItem("inputTitle", JSON.stringify(inp));
-        window.location.href = "../pages/Search.html"
-    }
-
-}
 
 //    SortBy Alphabetical, price
 document.querySelector("#sortBtn").addEventListener("change", sortBy);
@@ -116,14 +122,8 @@ function sortBy() {
 
 }
 
-var userName = JSON.parse(localStorage.getItem("UserName"));
-console.log(userName);
-if (userName !== null) {
-    document.querySelector("#signin").textContent = userName;
-}
-else {
 
-}
+
 //input functionality
 
 document.querySelector("#input").addEventListener("keypress", getData);
@@ -133,15 +133,17 @@ function getData(event) {
 
     if (event.key === "Enter") {
         console.log(input)
-        let url = "http://localhost:3000/games?genre=" + input +"&page="+page+"&size="+size+"";
+        let url = "http://127.0.0.1:4000/api/gameAllData?genre=" + input + "";
 
         let res = apiCall(url);
         res.then((res) => {
-            console.log(res.length)
-            appendData(res);
-            if (res.length === 0) {
-                swal("Oops!", "No Results Found", "error")
+            //console.log(res)
+            data = res;
+            console.log(data.length)
+            if (data.length === 0) {
+                alert("No Result Found");
             }
+            appendData(res);
         })
         res.catch((error) => {
             console.log(error)
@@ -193,7 +195,21 @@ function maxPrice() {
     }
 }
 
+//Sort by genre
 
+document.querySelector("#genre").addEventListener("change", sortByGenre);
+function sortByGenre() {
+    let selected = document.querySelector("#genre").value;
+    //console.log(selected);
+    let url = "http://127.0.0.1:4000/api/gameAllData?genre=" + selected + "";
+
+    let res = apiCall(url);
+    res.then((res) => {
+        console.log(res)
+        appendData(res);
+    })
+
+}
 
 //sort by platform
 
@@ -201,7 +217,7 @@ document.querySelector("#platform").addEventListener("change", sortByplatform);
 
 function sortByplatform() {
     let selected = document.querySelector("#platform").value;
-    let url = "http://localhost:3000/games?platform=" + selected + "&page="+page+"&size="+size+"";
+    let url = "http://127.0.0.1:4000/api/gameAllData?platform=" + selected + "";
 
     let res = apiCall(url);
     res.then((res) => {
@@ -218,5 +234,84 @@ document.querySelector("#clear").addEventListener("click", clearFilter)
 function clearFilter() {
     window.location.reload();
 }
+
+
+//    document.querySelector(".carousel-cell").addEventListener("click",storeGenre)
+
+//    function storeGenre(){
+//        console.log("here")
+//        var genre = document.querySelector("#genreData").textContent;
+//        console.log(genre)
+//        var genreData = [];
+//        genreData.push(genre) 
+//         localStorage.setItem("genreData", JSON.stringify(genreData))
+//    }
+
+var games = [
+    {
+        image: "https://www.freetogame.com/g/212/thumbnail.jpg",
+        title: "Fighting",
+    },
+    {
+        image: "https://www.freetogame.com/g/233/thumbnail.jpg",
+        title: "Strategy",
+    },
+    {
+        image: "https://www.freetogame.com/g/474/thumbnail.jpg",
+        title: "Sports",
+    },
+    {
+        image: "https://www.freetogame.com/g/351/thumbnail.jpg",
+        title: "Racing",
+    },
+    {
+        image: "https://www.freetogame.com/g/20/thumbnail.jpg",
+        title: "Shooter",
+    },
+    {
+        image: "https://www.freetogame.com/g/19/thumbnail.jpg",
+        title: "Card Game",
+    },
+    {
+        image: "https://www.freetogame.com/g/18/thumbnail.jpg",
+        title: "Social",
+    },
+    {
+        image: "https://www.freetogame.com/g/17/thumbnail.jpg",
+        title: "MMORPG",
+    },
+    {
+        image: "https://www.freetogame.com/g/16/thumbnail.jpg",
+        title: "MMO",
+    }
+];
+
+//appen(games);
+
+//console.log(games)
+games.map((el) => {
+    let { image, title } = el
+    var div = document.createElement("div");
+    div.setAttribute("class", "carousel-cell");
+    div.addEventListener("click", function () {
+        let genre = {
+            title,
+        }
+        localStorage.setItem("genreData", JSON.stringify(genre));
+        window.location.href = "GameDatas.html";
+    })
+    var div1 = document.createElement("div");
+    div1.setAttribute("class", "ImgTag");
+    var anchor = document.createElement("a");
+    var img = document.createElement("img");
+    img.src = image;
+    var tit = document.createElement("h3");
+    tit.textContent = title;
+    //console.log(tit)
+    anchor.append(img, tit);
+    div1.append(anchor);
+    div.append(div1);
+    document.querySelector(".carousel").append(div)
+})
 
 

@@ -151,23 +151,6 @@ margin: 0;
     width: 75%;
     padding: 2%;
     border: 1px solid transparent;
-    border: 1px solid transparent;
-}
-
-#next {
-    width: 75%;
-    border: 1px solid transparent;
-    margin-top: 10px;
-    margin-bottom: 40px;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 20px;
-}
-
-#next>button:hover{
-    color: aqua;
 }
 
 #displayGames>div:hover {
@@ -187,7 +170,7 @@ margin: 0;
 
 #displayGames > div {
     border: 1px solid transparent;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 #displayGames > div > img {

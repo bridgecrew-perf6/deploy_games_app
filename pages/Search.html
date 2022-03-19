@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Game Collections</title>
-    <link rel="stylesheet" href="../styles/Browse.css" />
-    <script src="../scripts/navStyle.js"></script>
-    <script type="module" src="../scripts/GameDatas.js"></script>
+    <title>Search</title>
+    <link rel="stylesheet" href="/styles/Browse.css" />
+    <script src="/scripts/navstyle.js"></script>
+    <script type="module" src="/scripts/search.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,28 +28,6 @@
       href="https://static-assets-prod.epicgames.com/epic-store/static/webpack/../favicon.ico"
       type="image/x-icon"
     />
-
-    <style>
-      /* <-----   Back To Top Button -----------> */
-
-      .back-to-top {
-        padding: 1rem;
-        position: fixed;
-        bottom: 8%;
-        right: 1%;
-        z-index: 2;
-        opacity: 0.6;
-        background-color: rgba(255, 255, 255, 0.952);
-        border-radius: 30px;
-      }
-
-      .back-to-top:hover {
-        -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-        background-color: rgb(255, 255, 255);
-        opacity: 1;
-      }
-    </style>
   </head>
 
   <body class="bg-[#121212] text-white">
@@ -126,7 +104,7 @@
           </div>
 
           <div class="px-6 pt-4 pb-2 hidden md:inline">
-            <a href="Discover.html">
+            <a href="/">
               <button
                 class="inline-block hover:text-white rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2"
               >
@@ -167,7 +145,7 @@
             </a>
 
             <span
-              class="rounded-full px-3 ml-[-18px] text-sm text-white border border-white light bg-black"
+              class="rounded-full px-3 ml-[-18px] text-sm text- light bg-black"
               style="border: 1px solid white"
               id="cartTotal"
               >0</span
@@ -180,11 +158,15 @@
         </div>
       </nav>
     </div>
-    <div id="navbar"></div>
-    <!-- main display -->
-    <div id="Header">
-      <h1 class="Header">Fighting Games</h1>
+    <!-- Product Slider  -->
+    <div id="Popular">
+      <h1>Popular Genres</h1>
     </div>
+
+    <div class="carousel" data-flickity='{ "wrapAround": true }'></div>
+
+    <!-- product slider End -->
+    <!-- main display -->
     <div id="gameCategories">
       <!-- top most filter part -->
       <div id="topFilter">
@@ -213,6 +195,17 @@
             <option value="9100">Greater Than Rs.9000.00</option>
           </select>
           <hr />
+          <select name="Genre" id="genre" class="selection">
+            <option value="">Genre</option>
+            <option value="Fighting">Fighting</option>
+            <option value="Shooter">Shooter</option>
+            <option value="Strategy">Strategy</option>
+            <option value="Racing">Racing</option>
+            <option value="Sports">Sports</option>
+            <option value="Sports">MMORPG</option>
+            <option value="Sports">MMO</option>
+          </select>
+          <hr />
           <select name="Platform" id="platform" class="selection">
             <option value="">Platform</option>
             <option value="Web Browser">Web Browser</option>
@@ -221,28 +214,20 @@
           <hr />
         </div>
       </div>
-      <div class="back-to-top">
-        <a href="#gameCategories">
-          <img
-            title="Back to Top."
-            src="https://res.cloudinary.com/de8cuyd0n/image/upload/v1520412541/E-commerce%20landing%20page/icons/back_-_top_1x.png"
-            alt="back to top"
-        /></a>
-      </div>
     </div>
     <div id="footer"></div>
   </body>
 </html>
 
+<!-- <----------   Contact US file  Start          --------------------  > -->
+
+<script type="text/javascript">!function(t,e){t.artibotApi={l:[],t:[],on:function(){this.l.push(arguments)},trigger:function(){this.t.push(arguments)}};var a=!1,i=e.createElement("script");i.async=!0,i.type="text/javascript",i.src="https://app.artibot.ai/loader.js",e.getElementsByTagName("head").item(0).appendChild(i),i.onreadystatechange=i.onload=function(){if(!(a||this.readyState&&"loaded"!=this.readyState&&"complete"!=this.readyState)){new window.ArtiBot({i:"4fc2ac37-3d97-4f29-98cc-2a4e4858c5f7"});a=!0}}}(window,document);</script>
+<!-- <----------   Contact US  file END             --------------------  > -->
+
+
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 <script type="module" defer>
-  import { sticknav } from "../components/stickyNav.js";
+  import { sticknav } from "/components/stickyNav.js";
   sticknav();
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- <----------   Contact US file  Start          --------------------  > -->
-
-<script
-  type="text/javascript">!function (t, e) {t.artibotApi = {l: [], t: [], on: function () {this.l.push(arguments)}, trigger: function () {this.t.push(arguments)}}; var a = !1, i = e.createElement("script"); i.async = !0, i.type = "text/javascript", i.src = "https://app.artibot.ai/loader.js", e.getElementsByTagName("head").item(0).appendChild(i), i.onreadystatechange = i.onload = function () {if (!(a || this.readyState && "loaded" != this.readyState && "complete" != this.readyState)) {new window.ArtiBot({i: "4fc2ac37-3d97-4f29-98cc-2a4e4858c5f7"}); a = !0} }}(window, document);</script>
-
-<!-- <----------   Contact US  file END             --------------------  > -->

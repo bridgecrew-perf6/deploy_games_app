@@ -800,7 +800,7 @@
 
         if (event.key === "Enter") {
           console.log(input);
-          let url = "http://127.0.0.1:4000/api/gameAllData?genre=" + input + "";
+          let url = "https://json1-nodejs.herokuapp.com/api/gameAllData?genre=" + input + "";
 
           let res = apiCall(url);
           res.then((res) => {

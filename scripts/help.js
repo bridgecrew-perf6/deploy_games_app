@@ -2,7 +2,7 @@ import apiCall from './fetch.js';
 import { footer } from "/components/navFooter.js";
 
 document.querySelector("#footer").innerHTML = footer();
-var url = "http://127.0.0.1:4000/api/gameAllData"
+var url = "https://json1-nodejs.herokuapp.com/api/gameAllData"
 var data;
 var res = apiCall(url);
 res.then((res) => {
@@ -59,14 +59,14 @@ function searchForHelp(value) {
     //console.log("searchForHelp")
 
     //fetching the data
-    apiCall(`http://127.0.0.1:4000/api/help?q=${value}`)
+    apiCall(`https://json1-nodejs.herokuapp.com/api/help?q=${value}`)
         .then((res) => {
             console.log('res:', res);
             if (res.length !== 0) {
                 displayHelp(res);
             }
             else {
-                apiCall(`http://127.0.0.1:4000/api/help`)
+                apiCall(`https://json1-nodejs.herokuapp.com/api/help`)
                     .then((response) => {
                         console.log('response:', response)
                         var responses = response;

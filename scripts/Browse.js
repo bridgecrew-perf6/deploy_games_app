@@ -1,7 +1,7 @@
    import { footer} from "/components/navFooter.js";
    import apiCall from "./fetch.js";
    document.querySelector("#footer").innerHTML = footer();
-   var url = "http://127.0.0.1:4000/api/gameAllData"
+   var url = "https://json1-nodejs.herokuapp.com/api/gameAllData"
     var data;
    var res = apiCall(url);
    res.then((res) => {
@@ -111,7 +111,7 @@
 
         if (event.key === "Enter"){
             console.log(input)
-            let url = "http://127.0.0.1:4000/api/gameAllData?title="+input+"";
+            let url = "https://json1-nodejs.herokuapp.com/api/gameAllData?title="+input+"";
 
        let res = apiCall(url);
        res.then((res) => {
@@ -139,7 +139,7 @@
 
         if (event.key === "Enter"){
             console.log(input)
-            let url = "http://127.0.0.1:4000/api/gameAllData?genre="+input+"";
+            let url = "https://json1-nodejs.herokuapp.com/api/gameAllData?genre="+input+"";
 
        let res = apiCall(url);
        res.then((res) => {
@@ -207,7 +207,7 @@
    function sortByGenre(){
        let selected = document.querySelector("#genre").value;
        //console.log(selected);
-       let url = "http://127.0.0.1:4000/api/gameAllData?genre="+selected+"";
+       let url = "https://json1-nodejs.herokuapp.com/api/gameAllData?genre="+selected+"";
 
        let res = apiCall(url);
        res.then((res) => {
@@ -223,7 +223,7 @@
 
    function sortByplatform(){
     let selected = document.querySelector("#platform").value;
-    let url = "http://127.0.0.1:4000/api/gameAllData?platform="+selected+"";
+    let url = "https://json1-nodejs.herokuapp.com/api/gameAllData?platform="+selected+"";
 
        let res = apiCall(url);
        res.then((res) => {

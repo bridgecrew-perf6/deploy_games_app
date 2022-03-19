@@ -2,7 +2,7 @@ import apiCall from "./fetch.js";
 import { footer } from "/components/navFooter.js";
 
 document.querySelector("#footer").innerHTML = footer();
-var url = "http://127.0.0.1:4000/api/gameAllData"
+var url = "https://json1-nodejs.herokuapp.com/apigameAllData"
 var data;
 var res = apiCall(url);
 res.then((res) => {

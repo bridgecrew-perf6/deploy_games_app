@@ -139,7 +139,7 @@ async function apiCall() {
 
   try {
 
-    const response = await fetch(`http://127.0.0.1:4000/api/gameAllData`);
+    const response = await fetch(`https://json1-nodejs.herokuapp.com/api/gameAllData`);
     const data = await response.json();
 
     // console.log(data)
